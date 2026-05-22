@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Prompt Architect Standalone</title>
-    <!-- Tailwind CSS -->
+
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Lucide Icons -->
+
+    <!-- Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    />
+
+    <!-- Lucide -->
     <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-        body { font-family: 'Inter', sans-serif; }
+
+        body {
+            font-family: "Inter", sans-serif;
+        }
+
         select {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
             background-repeat: no-repeat;
@@ -19,133 +31,670 @@
             background-size: 1rem;
             appearance: none;
         }
+
+        select:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #f4f4f5;
+        }
+
     </style>
 </head>
+
 <body class="bg-white text-zinc-900 selection:bg-zinc-100 min-h-screen flex flex-col">
+
     <div id="root" class="flex-1 flex flex-col">
+
+        <!-- HEADER -->
         <header class="border-b border-zinc-100 px-8 py-6 flex justify-between items-center bg-white sticky top-0 z-50">
+
             <div class="flex items-center gap-3">
+
                 <div class="w-10 h-10 bg-zinc-900 rounded-lg flex items-center justify-center text-white shadow-lg">
                     <i data-lucide="sparkles" size="20"></i>
                 </div>
-                <h1 class="text-xl font-bold tracking-tight">Prompt Architect</h1>
+
+                <h1 class="text-xl font-bold tracking-tight">
+                    Prompt Architect
+                </h1>
+
             </div>
-            <button id="reset-btn" class="text-xs font-bold text-zinc-400 hover:text-zinc-900 transition-colors uppercase tracking-widest px-4 py-2 hover:bg-zinc-50 rounded-lg flex items-center gap-2">
+
+            <button
+                id="reset-btn"
+                class="text-xs font-bold text-zinc-400 hover:text-zinc-900 transition-colors uppercase tracking-widest px-4 py-2 hover:bg-zinc-50 rounded-lg flex items-center gap-2"
+            >
+
                 <i data-lucide="rotate-ccw" size="14"></i>
+
                 Reset
+
             </button>
+
         </header>
 
+        <!-- MAIN -->
         <main class="flex-1 max-w-4xl mx-auto w-full px-8 py-12">
-            <div class="space-y-12">
-                <!-- Dropdowns Grid -->
-                <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-                    <!-- JavaScript will populate this -->
-                </div>
 
-                <!-- Additional Instructions -->
+            <div class="space-y-12">
+
+                <!-- OPTIONS -->
+                <div
+                    id="options-grid"
+                    class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8"
+                ></div>
+
+                <!-- ADDITIONAL -->
                 <div class="space-y-4">
-                    <label class="text-[11px] font-bold text-zinc-400 uppercase tracking-widest block">
+
+                    <label
+                        class="text-[11px] font-bold text-zinc-400 uppercase tracking-widest block"
+                    >
                         Additional Instructions
                     </label>
-                    <textarea id="additional-input" placeholder="e.g. Subtle 2-3 pimples, wearing a leather jacket..." class="w-full h-40 border border-zinc-200 rounded-2xl p-6 text-sm focus:ring-2 focus:ring-zinc-900 focus:border-zinc-900 outline-none bg-zinc-50 resize-none transition-all placeholder:text-zinc-300 leading-relaxed font-medium"></textarea>
+
+                    <textarea
+                        id="additional-input"
+                        placeholder="e.g. Subtle 2-3 pimples, wearing a leather jacket..."
+                        class="w-full h-40 border border-zinc-200 rounded-2xl p-6 text-sm focus:ring-2 focus:ring-zinc-900 focus:border-zinc-900 outline-none bg-zinc-50 resize-none transition-all placeholder:text-zinc-300 leading-relaxed font-medium"
+                    ></textarea>
+
                 </div>
 
-                <!-- Action Buttons -->
+                <!-- BUTTONS -->
                 <div class="pt-8 flex flex-col sm:flex-row gap-4">
-                    <button id="copy-btn" class="flex-1 h-16 rounded-2xl bg-zinc-900 text-white font-bold text-xs uppercase tracking-[0.2em] hover:bg-zinc-800 active:scale-[0.98] transition-all flex items-center justify-center gap-3 shadow-xl">
-                        <i data-lucide="copy" class="copy-icon" size="18"></i>
-                        <span id="copy-text">COPY</span>
+
+                    <!-- COPY -->
+                    <button
+                        id="copy-btn"
+                        class="flex-1 h-16 rounded-2xl bg-zinc-900 text-white font-bold text-xs uppercase tracking-[0.2em] hover:bg-zinc-800 active:scale-[0.98] transition-all flex items-center justify-center gap-3 shadow-xl"
+                    >
+
+                        <i data-lucide="copy" size="18"></i>
+
+                        <span id="copy-text">
+                            COPY
+                        </span>
+
                     </button>
-                    <button id="download-btn" class="flex-1 h-16 rounded-2xl bg-white border-2 border-zinc-900 text-zinc-900 font-bold text-xs uppercase tracking-[0.2em] hover:bg-zinc-50 active:scale-[0.98] transition-all flex items-center justify-center gap-3">
+
+                    <!-- DOWNLOAD -->
+                    <button
+                        id="download-btn"
+                        class="flex-1 h-16 rounded-2xl bg-white border-2 border-zinc-900 text-zinc-900 font-bold text-xs uppercase tracking-[0.2em] hover:bg-zinc-50 active:scale-[0.98] transition-all flex items-center justify-center gap-3"
+                    >
+
                         <i data-lucide="download" size="18"></i>
+
                         DOWNLOAD
+
                     </button>
+
                 </div>
+
             </div>
+
         </main>
 
+        <!-- FOOTER -->
         <footer class="py-8 px-8 border-t border-zinc-50 mt-auto">
-            <p class="text-center text-[10px] text-zinc-300 font-bold uppercase tracking-[0.3em]">
+
+            <p
+                class="text-center text-[10px] text-zinc-300 font-bold uppercase tracking-[0.3em]"
+            >
                 Portrait Synthesis Utility • Enterprise v2.4
             </p>
+
         </footer>
+
     </div>
 
     <script>
+
+        // CONFIG
         const OPTIONS_CONFIG = [
-            { label: "Ethnicity", values: ["Indian", "Asian", "European", "Latino", "Salvic", "African"] },
-            { label: "Gender", values: ["Male", "Female"] },
-            { label: "Facial Hair", values: ["None", "Clean Shaved", "Short", "Medium", "Large"] },
-            { label: "Hair style", values: ["Curly", "Straight", "Smooth"] },
-            { label: "Hair length", values: ["Bald", "Short", "Medium", "Lengthy", "Shoulder Lengthy", "Very Lengthy"] },
-            { label: "Hair color", values: ["Brown", "Blonde", "Black", "Dark Brown", "Blue", "Purple", "Red", "Ginger"] },
-            { label: "Skin Tone", values: ["White", "Fair", "Light brown", "Dark Brown", "Black"] },
-            { label: "Body type", values: ["Skinny", "Normal", "Athletic", "Muscular", "Oversized"] },
-            { label: "Eye color", values: ["Brown", "Green", "Orange", "Blue", "Black", "Dark Green"] }
+
+            {
+                label: "Ethnicity",
+                values: [
+                    "Indian",
+                    "Asian",
+                    "European",
+                    "Latino",
+                    "Salvic",
+                    "African"
+                ]
+            },
+
+            {
+                label: "Gender",
+                values: [
+                    "Male",
+                    "Female"
+                ]
+            },
+
+            {
+                label: "Facial Hair",
+                values: [
+                    "Clean Shaved",
+                    "Short",
+                    "Medium",
+                    "Large"
+                ]
+            },
+
+            {
+                label: "Hair style",
+                values: [
+                    "Curly",
+                    "Straight",
+                    "Smooth"
+                ]
+            },
+
+            {
+                label: "Hair length",
+                values: [
+                    "Bald",
+                    "Short",
+                    "Medium",
+                    "Lengthy",
+                    "Shoulder Lengthy",
+                    "Very Lengthy"
+                ]
+            },
+
+            {
+                label: "Hair color",
+                values: [
+                    "Brown",
+                    "Blonde",
+                    "Black",
+                    "Dark Brown",
+                    "Blue",
+                    "Purple",
+                    "Red",
+                    "Ginger"
+                ]
+            },
+
+            {
+                label: "Skin Tone",
+                values: [
+                    "White",
+                    "Fair",
+                    "Light brown",
+                    "Dark Brown",
+                    "Black"
+                ]
+            },
+
+            {
+                label: "Body type",
+                values: [
+                    "Skinny",
+                    "Normal",
+                    "Athletic",
+                    "Muscular",
+                    "Oversized"
+                ]
+            },
+
+            {
+                label: "Eye color",
+                values: [
+                    "Brown",
+                    "Green",
+                    "Orange",
+                    "Blue",
+                    "Black",
+                    "Dark Green"
+                ]
+            }
+
         ];
 
-        const CONSTANT_PROMPT = `Realastic face proportion	
-Crop : Face only with full hair visible on top side, Upto 70% neck on downside 	
-Background : White	
-Lighting : Soft 3 point	
-Aspect Ratio : 1:1	
-Skin Pores : Subtle Natural Pink	
-Focal length : 85mm	
+        // CONSTANT PROMPT
+        const CONSTANT_PROMPT = `Realistic face proportion
+Crop : Face only with full hair visible on top side, Upto 70% neck on downside
+Background : White
+Lighting : Soft 3 point
+Aspect Ratio : 1:1
+Skin Pores : Subtle Natural Pink
+Focal length : 85mm
 Camera height : Eye level`;
 
-        // State
+        // STATE
         const selections = {};
-        OPTIONS_CONFIG.forEach(opt => {
+        const selectRefs = {};
+
+        OPTIONS_CONFIG.forEach((opt) => {
             selections[opt.label] = opt.values[0];
         });
 
-        // Initialize UI
-        const grid = document.getElementById('options-grid');
-        OPTIONS_CONFIG.forEach(opt => {
-            const container = document.createElement('div');
-            container.className = 'space-y-2';
-            
-            const label = document.createElement('label');
-            label.className = 'text-[11px] font-bold text-zinc-400 uppercase tracking-widest block';
-            label.textContent = opt.label;
-            
-            const select = document.createElement('select');
-            select.className = 'w-full border border-zinc-200 rounded-xl px-4 py-3.5 text-sm focus:ring-2 focus:ring-zinc-900 focus:border-zinc-900 outline-none transition-all bg-zinc-50 cursor-pointer font-medium hover:bg-zinc-100/50';
-            
-            opt.values.forEach(val => {
-                const option = document.createElement('option');
+        // ROOT
+        const grid =
+            document.getElementById("options-grid");
+
+        // CREATE DROPDOWNS
+        OPTIONS_CONFIG.forEach((opt) => {
+
+            const container =
+                document.createElement("div");
+
+            container.className = "space-y-2";
+
+            // LABEL
+            const label =
+                document.createElement("label");
+
+            label.className =
+                "text-[11px] font-bold text-zinc-400 uppercase tracking-widest block";
+
+            label.textContent =
+                opt.label;
+
+            // SELECT
+            const select =
+                document.createElement("select");
+
+            select.className =
+                "w-full border border-zinc-200 rounded-xl px-4 py-3.5 text-sm focus:ring-2 focus:ring-zinc-900 focus:border-zinc-900 outline-none transition-all bg-zinc-50 cursor-pointer font-medium hover:bg-zinc-100/50";
+
+            select.dataset.label =
+                opt.label;
+
+            // OPTIONS
+            opt.values.forEach((val) => {
+
+                const option =
+                    document.createElement("option");
+
                 option.value = val;
                 option.textContent = val;
+
                 select.appendChild(option);
+
             });
 
-            select.addEventListener('change', (e) => {
-                selections[opt.label] = e.target.value;
+            // CHANGE EVENT
+            select.addEventListener("change", (e) => {
+
+                selections[opt.label] =
+                    e.target.value;
+
+                // GENDER OR BALD LOGIC
+                if (
+                    opt.label === "Gender" ||
+                    opt.label === "Hair length"
+                ) {
+
+                    handleGenderChange(
+                        selections["Gender"]
+                    );
+                }
+
             });
-            
+
             container.appendChild(label);
             container.appendChild(select);
+
             grid.appendChild(container);
 
-            // Store ref for resetting
+            // SAVE REF
             opt.element = select;
+            selectRefs[opt.label] = select;
+
         });
 
-        const additionalInput = document.getElementById('additional-input');
+        // TEXTAREA
+        const additionalInput =
+            document.getElementById("additional-input");
 
+        // GENDER + BALD LOGIC
+        function handleGenderChange(gender) {
+
+            const facialHairSelect =
+                selectRefs["Facial Hair"];
+
+            const hairLengthSelect =
+                selectRefs["Hair length"];
+
+            const hairStyleContainer =
+                selectRefs["Hair style"].parentElement;
+
+            const hairColorContainer =
+                selectRefs["Hair color"].parentElement;
+
+            // FEMALE
+            if (gender === "Female") {
+
+                // REMOVE OLD OPTIONS
+                facialHairSelect.innerHTML = "";
+
+                // CREATE NONE OPTION
+                const femaleOption =
+                    document.createElement("option");
+
+                femaleOption.value = "None";
+                femaleOption.textContent = "None";
+
+                facialHairSelect.appendChild(
+                    femaleOption
+                );
+
+                // SET NONE
+                facialHairSelect.value = "None";
+
+                selections["Facial Hair"] =
+                    "None";
+
+                // DISABLE
+                facialHairSelect.disabled = true;
+
+                // HIDE BALD
+                Array.from(
+                    hairLengthSelect.options
+                ).forEach((option) => {
+
+                    if (option.value === "Bald") {
+
+                        option.hidden = true;
+                    }
+                });
+
+                // IF BALD SELECTED
+                if (
+                    hairLengthSelect.value === "Bald"
+                ) {
+
+                    hairLengthSelect.value =
+                        "Short";
+
+                    selections["Hair length"] =
+                        "Short";
+                }
+
+                // ALWAYS SHOW
+                hairStyleContainer.style.display =
+                    "block";
+
+                hairColorContainer.style.display =
+                    "block";
+
+            }
+
+            // MALE
+            else {
+
+                // ENABLE
+                facialHairSelect.disabled = false;
+
+                // REBUILD OPTIONS
+                facialHairSelect.innerHTML = "";
+
+                const maleFacialHairOptions = [
+                    "Clean Shaved",
+                    "Short",
+                    "Medium",
+                    "Large"
+                ];
+
+                maleFacialHairOptions.forEach((val) => {
+
+                    const option =
+                        document.createElement("option");
+
+                    option.value = val;
+                    option.textContent = val;
+
+                    facialHairSelect.appendChild(
+                        option
+                    );
+
+                });
+
+                facialHairSelect.value =
+                    "Clean Shaved";
+
+                selections["Facial Hair"] =
+                    "Clean Shaved";
+
+                // SHOW BALD
+                Array.from(
+                    hairLengthSelect.options
+                ).forEach((option) => {
+
+                    if (option.value === "Bald") {
+
+                        option.hidden = false;
+                    }
+
+                });
+
+                // MALE + BALD
+                if (
+                    selections["Hair length"] === "Bald"
+                ) {
+
+                    hairStyleContainer.style.display =
+                        "none";
+
+                    hairColorContainer.style.display =
+                        "none";
+
+                }
+
+                // MALE + NON BALD
+                else {
+
+                    hairStyleContainer.style.display =
+                        "block";
+
+                    hairColorContainer.style.display =
+                        "block";
+                }
+
+            }
+
+        }
+
+        // GENERATE PROMPT
         function generatePrompt() {
-            let prompt = "Generate Model Image\t\n\n";
-            
-            OPTIONS_CONFIG.forEach(opt => {
-                const label = opt.label;
-                const value = selections[label];
-                const separator = label === "Ethnicity" ? ": \t" : " : \t";
-                prompt += `${label}${separator}${value}\n`;
+
+            let prompt =
+                "Generate Model Image\n\n";
+
+            OPTIONS_CONFIG.forEach((opt) => {
+
+                const label =
+                    opt.label;
+
+                let value =
+                    selections[label];
+
+                // FEMALE => FORCE NONE
+                if (
+                    selections["Gender"] === "Female" &&
+                    label === "Facial Hair"
+                ) {
+
+                    value = "None";
+                }
+
+                // MALE + BALD
+                if (
+                    selections["Gender"] === "Male" &&
+                    selections["Hair length"] === "Bald" &&
+                    (
+                        label === "Hair style" ||
+                        label === "Hair color"
+                    )
+                ) {
+
+                    return;
+                }
+
+                // CLEAN CONSISTENT SPACING
+                prompt += `${label} : ${value}\n`;
+
             });
-            
-            const additionalValue = additionalInput.value.trim();
+
+            // ADDITIONAL
+            const additionalValue =
+                additionalInput.value.trim();
+
             if (additionalValue) {
+
+                prompt +=
+                    `\nAdditional Instructions : ${additionalValue}\n`;
+
+            }
+
+            // CONSTANT
+            prompt +=
+                `\n${CONSTANT_PROMPT}`;
+
+            return prompt;
+
+        }
+
+        // COPY
+        document.getElementById("copy-btn")
+            .addEventListener("click", async () => {
+
+                const prompt =
+                    generatePrompt();
+
+                try {
+
+                    // MODERN COPY
+                    await navigator.clipboard
+                        .writeText(prompt);
+
+                    showCopied();
+
+                }
+
+                catch (err) {
+
+                    // FALLBACK
+                    const textarea =
+                        document.createElement("textarea");
+
+                    textarea.value =
+                        prompt;
+
+                    textarea.style.position =
+                        "fixed";
+
+                    textarea.style.left =
+                        "-9999px";
+
+                    document.body.appendChild(
+                        textarea
+                    );
+
+                    textarea.focus();
+                    textarea.select();
+
+                    try {
+
+                        document.execCommand("copy");
+
+                        showCopied();
+
+                    }
+
+                    catch (error) {
+
+                        console.error(error);
+
+                        alert("Copy failed");
+
+                    }
+
+                    document.body.removeChild(
+                        textarea
+                    );
+                }
+
+            });
+
+        // COPY SUCCESS UI
+        function showCopied() {
+
+            const textSpan =
+                document.getElementById("copy-text");
+
+            const originalText =
+                textSpan.textContent;
+
+            textSpan.textContent =
+                "COPIED";
+
+            setTimeout(() => {
+
+                textSpan.textContent =
+                    originalText;
+
+            }, 2000);
+
+        }
+
+        // DOWNLOAD
+        document.getElementById("download-btn")
+            .addEventListener("click", () => {
+
+                const prompt =
+                    generatePrompt();
+
+                const element =
+                    document.createElement("a");
+
+                const file =
+                    new Blob(
+                        [prompt],
+                        { type: "text/plain" }
+                    );
+
+                element.href =
+                    URL.createObjectURL(file);
+
+                element.download =
+                    "model_prompt.txt";
+
+                document.body.appendChild(
+                    element
+                );
+
+                element.click();
+
+                document.body.removeChild(
+                    element
+                );
+
+            });
+
+        // RESET
+        document.getElementById("reset-btn")
+            .addEventListener("click", () => {
+
+                location.reload();
+
+            });
+
+        // INITIALIZE
+        handleGenderChange("Male");
+
+        // ICONS
+        lucide.createIcons();
+
+    </script>
+
+</body>
+</html>            if (additionalValue) {
                 prompt += `\nAdditional Instructions : \t${additionalValue}\n`;
             }
 
