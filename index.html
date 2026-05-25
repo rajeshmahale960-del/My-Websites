@@ -1,18 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    />
-
-    <title>
-        Prompt Architect Standalone
-    </title>
+    <title>Prompt Architect Standalone</title>
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -33,93 +25,56 @@
         }
 
         select {
-
-            background-image:
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-
-            background-repeat:
-                no-repeat;
-
-            background-position:
-                right 1rem center;
-
-            background-size:
-                1rem;
-
-            appearance:
-                none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1rem;
+            appearance: none;
         }
 
         select:disabled {
-
-            opacity:
-                0.5;
-
-            cursor:
-                not-allowed;
-
-            background-color:
-                #f4f4f5;
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #f4f4f5;
         }
 
     </style>
-
 </head>
 
 <body class="bg-white text-zinc-900 selection:bg-zinc-100 min-h-screen flex flex-col">
 
-    <div
-        id="root"
-        class="flex-1 flex flex-col"
-    >
+    <div id="root" class="flex-1 flex flex-col">
 
         <!-- HEADER -->
-        <header
-            class="border-b border-zinc-100 px-8 py-6 flex justify-between items-center bg-white sticky top-0 z-50"
-        >
+        <header class="border-b border-zinc-100 px-8 py-6 flex justify-between items-center bg-white sticky top-0 z-50">
 
             <div class="flex items-center gap-3">
 
-                <div
-                    class="w-10 h-10 bg-zinc-900 rounded-lg flex items-center justify-center text-white shadow-lg"
-                >
-
-                    <i
-                        data-lucide="sparkles"
-                        size="20"
-                    ></i>
-
+                <div class="w-10 h-10 bg-zinc-900 rounded-lg flex items-center justify-center text-white shadow-lg">
+                    <i data-lucide="sparkles" size="20"></i>
                 </div>
 
-                <h1
-                    class="text-xl font-bold tracking-tight"
-                >
+                <h1 class="text-xl font-bold tracking-tight">
                     Prompt Architect
                 </h1>
 
             </div>
 
-            <!-- RESET -->
             <button
                 id="reset-btn"
                 class="text-xs font-bold text-zinc-400 hover:text-zinc-900 transition-colors uppercase tracking-widest px-4 py-2 hover:bg-zinc-50 rounded-lg flex items-center gap-2"
             >
 
-                <i
-                    data-lucide="rotate-ccw"
-                    size="14"
-                ></i>
+                <i data-lucide="rotate-ccw" size="14"></i>
 
-                RESET
+                Reset
 
             </button>
 
         </header>
 
         <!-- MAIN -->
-        <main
-            class="flex-1 max-w-4xl mx-auto w-full px-8 py-12"
-        >
+        <main class="flex-1 max-w-4xl mx-auto w-full px-8 py-12">
 
             <div class="space-y-12">
 
@@ -135,9 +90,7 @@
                     <label
                         class="text-[11px] font-bold text-zinc-400 uppercase tracking-widest block"
                     >
-
                         Additional Instructions
-
                     </label>
 
                     <textarea
@@ -149,688 +102,13 @@
                 </div>
 
                 <!-- BUTTONS -->
-                <div
-                    class="pt-8 flex flex-col sm:flex-row gap-4"
-                >
+                <div class="pt-8 flex flex-col sm:flex-row gap-4">
 
                     <!-- COPY -->
                     <button
                         id="copy-btn"
                         class="flex-1 h-16 rounded-2xl bg-zinc-900 text-white font-bold text-xs uppercase tracking-[0.2em] hover:bg-zinc-800 active:scale-[0.98] transition-all flex items-center justify-center gap-3 shadow-xl"
                     >
-
-                        <i
-                            data-lucide="copy"
-                            size="18"
-                        ></i>
-
-                        <span id="copy-text">
-                            COPY
-                        </span>
-
-                    </button>
-
-                    <!-- DOWNLOAD -->
-                    <button
-                        id="download-btn"
-                        class="flex-1 h-16 rounded-2xl bg-white border-2 border-zinc-900 text-zinc-900 font-bold text-xs uppercase tracking-[0.2em] hover:bg-zinc-50 active:scale-[0.98] transition-all flex items-center justify-center gap-3"
-                    >
-
-                        <i
-                            data-lucide="download"
-                            size="18"
-                        ></i>
-
-                        DOWNLOAD
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </main>
-
-        <!-- FOOTER -->
-        <footer
-            class="py-8 px-8 border-t border-zinc-50 mt-auto"
-        >
-
-            <p
-                class="text-center text-[10px] text-zinc-300 font-bold uppercase tracking-[0.3em]"
-            >
-
-                Portrait Synthesis Utility • Enterprise v2.4
-
-            </p>
-
-        </footer>
-
-    </div>
-
-    <script>
-
-        // CONFIG
-        const OPTIONS_CONFIG = [
-
-            {
-                label: "Ethnicity",
-                values: [
-                    "Indian",
-                    "Asian",
-                    "European",
-                    "Latino",
-                    "Salvic",
-                    "African"
-                ]
-            },
-
-            {
-                label: "Gender",
-                values: [
-                    "Male",
-                    "Female"
-                ]
-            },
-
-            {
-                label: "Facial Hair",
-                values: [
-                    "Clean Shaved",
-                    "Short",
-                    "Medium",
-                    "Large"
-                ]
-            },
-
-            {
-                label: "Hair style",
-                values: [
-                    "Curly",
-                    "Straight",
-                    "Smooth"
-                ]
-            },
-
-            {
-                label: "Hair length",
-                values: [
-                    "Bald",
-                    "Short",
-                    "Medium",
-                    "Lengthy",
-                    "Shoulder Lengthy",
-                    "Very Lengthy"
-                ]
-            },
-
-            {
-                label: "Hair color",
-                values: [
-                    "Brown",
-                    "Blonde",
-                    "Black",
-                    "Dark Brown",
-                    "Blue",
-                    "Purple",
-                    "Red",
-                    "Ginger"
-                ]
-            },
-
-            {
-                label: "Skin Tone",
-                values: [
-                    "White",
-                    "Fair",
-                    "Light brown",
-                    "Dark Brown",
-                    "Black"
-                ]
-            },
-
-            {
-                label: "Body type",
-                values: [
-                    "Skinny",
-                    "Normal",
-                    "Athletic",
-                    "Muscular",
-                    "Oversized"
-                ]
-            },
-
-            {
-                label: "Eye color",
-                values: [
-                    "Brown",
-                    "Green",
-                    "Orange",
-                    "Blue",
-                    "Black",
-                    "Dark Green"
-                ]
-            }
-
-        ];
-
-        // CONSTANT PROMPT
-        const CONSTANT_PROMPT =
-`Realastic face proportion
-Crop : Face only with full hair visible on top side, Upto 70% neck on downside
-Background : White
-Lighting : Soft 3 point
-Aspect Ratio : 1:1
-Skin Pores : Subtle Natural Pink
-Focal length : 85mm
-Camera height : Eye level`;
-
-        // STATE
-        const selections = {};
-        const selectRefs = {};
-
-        OPTIONS_CONFIG.forEach((opt) => {
-
-            selections[opt.label] =
-                opt.values[0];
-
-        });
-
-        // ROOT
-        const grid =
-            document.getElementById(
-                "options-grid"
-            );
-
-        // CREATE DROPDOWNS
-        OPTIONS_CONFIG.forEach((opt) => {
-
-            const container =
-                document.createElement("div");
-
-            container.className =
-                "space-y-2";
-
-            // LABEL
-            const label =
-                document.createElement("label");
-
-            label.className =
-                "text-[11px] font-bold text-zinc-400 uppercase tracking-widest block";
-
-            label.textContent =
-                opt.label;
-
-            // SELECT
-            const select =
-                document.createElement("select");
-
-            select.className =
-                "w-full border border-zinc-200 rounded-xl px-4 py-3.5 text-sm focus:ring-2 focus:ring-zinc-900 focus:border-zinc-900 outline-none transition-all bg-zinc-50 cursor-pointer font-medium hover:bg-zinc-100/50";
-
-            // OPTIONS
-            opt.values.forEach((val) => {
-
-                const option =
-                    document.createElement("option");
-
-                option.value =
-                    val;
-
-                option.textContent =
-                    val;
-
-                select.appendChild(option);
-
-            });
-
-            // CHANGE EVENT
-            select.addEventListener(
-                "change",
-                (e) => {
-
-                    selections[opt.label] =
-                        e.target.value;
-
-                    if (
-                        opt.label === "Gender" ||
-                        opt.label === "Hair length"
-                    ) {
-
-                        handleGenderChange(
-                            selections["Gender"]
-                        );
-
-                    }
-
-                }
-            );
-
-            container.appendChild(label);
-            container.appendChild(select);
-
-            grid.appendChild(container);
-
-            // SAVE REF
-            selectRefs[opt.label] =
-                select;
-
-        });
-
-        // TEXTAREA
-        const additionalInput =
-            document.getElementById(
-                "additional-input"
-            );
-
-        // GENDER + BALD LOGIC
-        function handleGenderChange(gender) {
-
-            const facialHairSelect =
-                selectRefs["Facial Hair"];
-
-            const hairLengthSelect =
-                selectRefs["Hair length"];
-
-            const hairStyleContainer =
-                selectRefs["Hair style"]
-                    .parentElement;
-
-            const hairColorContainer =
-                selectRefs["Hair color"]
-                    .parentElement;
-
-            // FEMALE
-            if (gender === "Female") {
-
-                // FACIAL HAIR NONE
-                facialHairSelect.innerHTML =
-                    "";
-
-                const femaleOption =
-                    document.createElement(
-                        "option"
-                    );
-
-                femaleOption.value =
-                    "None";
-
-                femaleOption.textContent =
-                    "None";
-
-                facialHairSelect.appendChild(
-                    femaleOption
-                );
-
-                facialHairSelect.value =
-                    "None";
-
-                facialHairSelect.disabled =
-                    true;
-
-                selections["Facial Hair"] =
-                    "None";
-
-                // HIDE BALD
-                Array.from(
-                    hairLengthSelect.options
-                ).forEach((option) => {
-
-                    if (
-                        option.value === "Bald"
-                    ) {
-
-                        option.hidden =
-                            true;
-
-                    }
-
-                });
-
-                // IF BALD SELECTED
-                if (
-                    hairLengthSelect.value ===
-                    "Bald"
-                ) {
-
-                    hairLengthSelect.value =
-                        "Short";
-
-                    selections["Hair length"] =
-                        "Short";
-
-                }
-
-                // SHOW HAIR STYLE/COLOR
-                hairStyleContainer.style.display =
-                    "block";
-
-                hairColorContainer.style.display =
-                    "block";
-
-            }
-
-            // MALE
-            else {
-
-                facialHairSelect.disabled =
-                    false;
-
-                facialHairSelect.innerHTML =
-                    "";
-
-                const maleOptions = [
-                    "Clean Shaved",
-                    "Short",
-                    "Medium",
-                    "Large"
-                ];
-
-                maleOptions.forEach((val) => {
-
-                    const option =
-                        document.createElement(
-                            "option"
-                        );
-
-                    option.value =
-                        val;
-
-                    option.textContent =
-                        val;
-
-                    facialHairSelect.appendChild(
-                        option
-                    );
-
-                });
-
-                facialHairSelect.value =
-                    "Clean Shaved";
-
-                selections["Facial Hair"] =
-                    "Clean Shaved";
-
-                // SHOW BALD
-                Array.from(
-                    hairLengthSelect.options
-                ).forEach((option) => {
-
-                    if (
-                        option.value === "Bald"
-                    ) {
-
-                        option.hidden =
-                            false;
-
-                    }
-
-                });
-
-                // BALD LOGIC
-                if (
-                    selections["Hair length"] ===
-                    "Bald"
-                ) {
-
-                    hairStyleContainer.style.display =
-                        "none";
-
-                    hairColorContainer.style.display =
-                        "none";
-
-                }
-
-                else {
-
-                    hairStyleContainer.style.display =
-                        "block";
-
-                    hairColorContainer.style.display =
-                        "block";
-
-                }
-
-            }
-
-        }
-
-        // GENERATE PROMPT
-        function generatePrompt() {
-
-            let prompt =
-`Generate Model Image
-
-`;
-
-            OPTIONS_CONFIG.forEach((opt) => {
-
-                const label =
-                    opt.label;
-
-                let value =
-                    selections[label];
-
-                // FEMALE FORCE NONE
-                if (
-                    selections["Gender"] ===
-                    "Female" &&
-                    label === "Facial Hair"
-                ) {
-
-                    value = "None";
-
-                }
-
-                // MALE + BALD
-                if (
-                    selections["Gender"] ===
-                    "Male" &&
-                    selections["Hair length"] ===
-                    "Bald" &&
-                    (
-                        label === "Hair style" ||
-                        label === "Hair color"
-                    )
-                ) {
-
-                    return;
-
-                }
-
-                prompt +=
-`${label} : ${value}
-`;
-
-            });
-
-            // ADDITIONAL
-            const additionalValue =
-                additionalInput.value.trim();
-
-            if (additionalValue) {
-
-                prompt +=
-`
-Additional Instructions : ${additionalValue}
-`;
-
-            }
-
-            prompt +=
-`
-${CONSTANT_PROMPT}`;
-
-            return prompt;
-
-        }
-
-        // COPY
-        document.getElementById(
-            "copy-btn"
-        ).addEventListener(
-            "click",
-            async () => {
-
-                const prompt =
-                    generatePrompt();
-
-                try {
-
-                    await navigator.clipboard
-                        .writeText(prompt);
-
-                    showCopied();
-
-                }
-
-                catch (err) {
-
-                    // FALLBACK
-                    const textarea =
-                        document.createElement(
-                            "textarea"
-                        );
-
-                    textarea.value =
-                        prompt;
-
-                    textarea.style.position =
-                        "fixed";
-
-                    textarea.style.left =
-                        "-9999px";
-
-                    document.body.appendChild(
-                        textarea
-                    );
-
-                    textarea.focus();
-                    textarea.select();
-
-                    try {
-
-                        document.execCommand(
-                            "copy"
-                        );
-
-                        showCopied();
-
-                    }
-
-                    catch (error) {
-
-                        console.error(
-                            error
-                        );
-
-                        alert(
-                            "Copy failed"
-                        );
-
-                    }
-
-                    document.body.removeChild(
-                        textarea
-                    );
-
-                }
-
-            }
-        );
-
-        // COPY UI
-        function showCopied() {
-
-            const textSpan =
-                document.getElementById(
-                    "copy-text"
-                );
-
-            const originalText =
-                textSpan.textContent;
-
-            textSpan.textContent =
-                "COPIED";
-
-            setTimeout(() => {
-
-                textSpan.textContent =
-                    originalText;
-
-            }, 2000);
-
-        }
-
-        // DOWNLOAD
-        document.getElementById(
-            "download-btn"
-        ).addEventListener(
-            "click",
-            () => {
-
-                const prompt =
-                    generatePrompt();
-
-                const element =
-                    document.createElement(
-                        "a"
-                    );
-
-                const file =
-                    new Blob(
-                        [prompt],
-                        {
-                            type:
-                                "text/plain"
-                        }
-                    );
-
-                element.href =
-                    URL.createObjectURL(
-                        file
-                    );
-
-                element.download =
-                    "model_prompt.txt";
-
-                document.body.appendChild(
-                    element
-                );
-
-                element.click();
-
-                document.body.removeChild(
-                    element
-                );
-
-            }
-        );
-
-        // RESET
-        document.getElementById(
-            "reset-btn"
-        ).addEventListener(
-            "click",
-            () => {
-
-                location.reload();
-
-            }
-        );
-
-        // INIT
-        handleGenderChange(
-            "Male"
-        );
-
-        // ICONS
-        lucide.createIcons();
-
-    </script>
-
-</body>
-</html>                    >
 
                         <i data-lucide="copy" size="18"></i>
 
@@ -1415,50 +693,5 @@ Camera height : Eye level`;
 
     </script>
 
-</body>
-</html>            if (additionalValue) {
-                prompt += `\nAdditional Instructions : \t${additionalValue}\n`;
-            }
-
-            prompt += `\n${CONSTANT_PROMPT}`;
-            return prompt;
-        }
-
-        // Action Handlers
-        document.getElementById('copy-btn').addEventListener('click', async () => {
-            const prompt = generatePrompt();
-            await navigator.clipboard.writeText(prompt);
-            
-            const textSpan = document.getElementById('copy-text');
-            const originalText = textSpan.textContent;
-            textSpan.textContent = 'COPIED';
-            
-            setTimeout(() => {
-                textSpan.textContent = originalText;
-            }, 2000);
-        });
-
-        document.getElementById('download-btn').addEventListener('click', () => {
-            const prompt = generatePrompt();
-            const element = document.createElement("a");
-            const file = new Blob([prompt], { type: 'text/plain' });
-            element.href = URL.createObjectURL(file);
-            element.download = "model_prompt.txt";
-            document.body.appendChild(element);
-            element.click();
-            document.body.removeChild(element);
-        });
-
-        document.getElementById('reset-btn').addEventListener('click', () => {
-            OPTIONS_CONFIG.forEach(opt => {
-                opt.element.value = opt.values[0];
-                selections[opt.label] = opt.values[0];
-            });
-            additionalInput.value = '';
-        });
-
-        // Initialize Lucide icons
-        lucide.createIcons();
-    </script>
 </body>
 </html>
